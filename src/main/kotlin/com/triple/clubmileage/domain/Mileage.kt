@@ -8,16 +8,12 @@ import javax.persistence.*
 
 @Entity
 @EntityListeners(AuditingEntityListener::class)
-data class ReviewEvent(
+data class Mileage(
     @Id
     var id: String,
-    var content: String,
-
-    @ElementCollection
-    var attackedImages: List<String> = arrayListOf(),
-
+    var mileageType: MileageType,
+    var mileage: Int = 0,
     var userId: String,
-    var placeId: String,
 
     @CreatedDate
     @Column(updatable = false)
