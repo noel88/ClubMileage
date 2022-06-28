@@ -17,6 +17,7 @@ data class ReviewEvent(
     var attackedImages: List<String> = arrayListOf(),
 
     var userId: String,
+    var reviewId: String,
     var placeId: String,
 
     @CreatedDate
