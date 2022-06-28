@@ -1,8 +1,8 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/club
-    password: admin
+    url: jdbc:postgresql://localhost:5432/club?currentSchema=${triple.club.database.schema}
+    password: password
     username: postgres
   jpa:
     generate-ddl: true
@@ -16,3 +16,19 @@ spring:
 
 server:
   port: 9900
+
+triple:
+  club:
+    database:
+      schema: mileage
+
+springdoc:
+  swagger-ui:
+    path: swagger-ui.html
+  show-actuator: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
