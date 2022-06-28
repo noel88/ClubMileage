@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/club
+    password: password
+    username: postgres
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    database: postgresql
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 9900
+
+springdoc:
+  swagger-ui:
+    path: swagger-ui.html
+  show-actuator: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
