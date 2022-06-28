@@ -10,14 +10,13 @@ import javax.persistence.*
 @EntityListeners(AuditingEntityListener::class)
 data class ReviewEvent(
     @Id
-    var id: String,
+    var reviewId: String,
     var content: String,
 
     @ElementCollection
-    var attackedImages: List<String> = arrayListOf(),
+    var attackedImages: List<String>? = null,
 
     var userId: String,
-    var reviewId: String,
     var placeId: String,
 
     @CreatedDate

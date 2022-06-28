@@ -8,9 +8,12 @@ import javax.persistence.*
 
 @Entity
 @EntityListeners(AuditingEntityListener::class)
+@Table(indexes = [Index(name = "i_user", columnList = "userId")])
 data class Mileage(
     @Id
     var id: String,
+
+    @Enumerated(value = EnumType.STRING)
     var mileageType: MileageType,
     var mileage: Int = 0,
     var userId: String,
@@ -20,4 +23,7 @@ data class Mileage(
     var createdDate: LocalDateTime? = null,
     @LastModifiedDate
     var modifiedDate: LocalDateTime? = null,
+
+    @OneToOne
+    var reviewEvent: ReviewEvent? = null
 )
