@@ -7,12 +7,11 @@ import com.triple.clubmileage.service.dto.MileageInfo
 
 class AddEventActionCommand(
     private val actionService: ActionService,
-    private var reviewEvent: ReviewEvent,
-    private var mileageEventDto: MileageEventDto,
+    private var reviewEvent: ReviewEvent
 
     ) : EventActionCommand {
-    override fun execute(): MileageInfo {
-        return actionService.add(reviewEvent, mileageEventDto)
+    override fun execute(): MileageInfo? {
+        return actionService.add(reviewEvent)
     }
 
 }
