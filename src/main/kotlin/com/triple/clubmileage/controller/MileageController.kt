@@ -28,7 +28,7 @@ class MileageController(
     @PostMapping("/events/mileage")
     fun setMileage(@RequestBody mileageEventDto: MileageEventDto): ResponseEntity<String> {
         mileageService.event(mileageEventDto)
-        return ResponseEntity("Event", HttpStatus.OK)
+        return ResponseEntity(HttpStatus.OK)
     }
 
 }
