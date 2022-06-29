@@ -15,15 +15,14 @@ data class Mileage(
 
     @Enumerated(value = EnumType.STRING)
     var mileageType: MileageType,
-    var mileage: Int = 0,
+    var point: Int = 0,
     var userId: String,
+    var placeId: String,
+    var reviewEventId: String,
 
     @CreatedDate
     @Column(updatable = false)
     var createdDate: LocalDateTime? = null,
     @LastModifiedDate
     var modifiedDate: LocalDateTime? = null,
-
-    @OneToOne
-    var reviewEvent: ReviewEvent? = null
 )
