@@ -13,20 +13,40 @@ class ReviewEventService(
     fun setEvent(eventDto: EventDto) {
         val reviewEvent = ReviewEvent(
             reviewId = eventDto.reviewId,
+            type = eventDto.type,
+            action = eventDto.action,
+            content = eventDto.content,
+            attackedImages = eventDto.attachedPhotoIds,
+            userId = eventDto.userId,
+            placeId = eventDto.placeId,
+
+        )
+        reviewEventRepository.save(reviewEvent)
+    }
+
+    fun findByReviewId(reviewId: String): ReviewEvent? {
+        return reviewEventRepository.findByReviewIdOrderByModifiedDateDesc(reviewId)
+    }
+
+    fun findByCurrentModifiedReviewEvent(userId: String, placeId: String): ReviewEvent? {
+        return reviewEventRepository.findByCurrentModifiedReviewEvent(userId, placeId)
+    }
+
+    fun countByPlaceId(placeId: String) : Int {
+        return reviewEventRepository.countByPlaceId(placeId)
+    }
+
+    fun delete(eventDto: EventDto) {
+        val reviewEvent = ReviewEvent(
+            reviewId = eventDto.reviewId,
+            type = eventDto.type,
+            action = eventDto.action,
             content = eventDto.content,
             attackedImages = eventDto.attachedPhotoIds,
             userId = eventDto.userId,
             placeId = eventDto.placeId,
         )
         reviewEventRepository.save(reviewEvent)
-    }
-
-    fun findById(id: String): ReviewEvent? {
-        return reviewEventRepository.findById(id).orElse(null)
-    }
-
-    fun countByPlaceId(placeId: String) : Int {
-        return reviewEventRepository.countByPlaceId(placeId)
     }
 
 }
