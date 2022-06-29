@@ -35,18 +35,4 @@ class ReviewEventService(
     fun countByPlaceId(placeId: String) : Int {
         return reviewEventRepository.countByPlaceId(placeId)
     }
-
-    fun delete(eventDto: EventDto) {
-        val reviewEvent = ReviewEvent(
-            reviewId = eventDto.reviewId,
-            type = eventDto.type,
-            action = eventDto.action,
-            content = eventDto.content,
-            attackedImages = eventDto.attachedPhotoIds,
-            userId = eventDto.userId,
-            placeId = eventDto.placeId,
-        )
-        reviewEventRepository.save(reviewEvent)
-    }
-
 }
