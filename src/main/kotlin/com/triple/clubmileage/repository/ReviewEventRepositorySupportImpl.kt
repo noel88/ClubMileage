@@ -1,11 +1,17 @@
 package com.triple.clubmileage.repository
 
+import com.querydsl.core.group.GroupBy
 import com.querydsl.core.types.Order
 import com.querydsl.core.types.OrderSpecifier
 import com.querydsl.jpa.impl.JPAQueryFactory
 import com.triple.clubmileage.domain.Action
 import com.triple.clubmileage.domain.QReviewEvent.reviewEvent
 import com.triple.clubmileage.domain.ReviewEvent
+import java.util.*
+import java.util.Map
+import java.util.function.Function
+import java.util.stream.Collectors
+import kotlin.collections.count
 
 class ReviewEventRepositorySupportImpl (
     private val query: JPAQueryFactory,
@@ -36,12 +42,13 @@ class ReviewEventRepositorySupportImpl (
     }
 
     override fun isFirstPlaceReview(placeId: String): Boolean {
-        val events = query
-            .selectFrom(reviewEvent)
-            .where(reviewEvent.placeId.eq(placeId))
-            .fetch()
+        val transform = query
+            .from(reviewEvent)
+            .groupBy(reviewEvent.placeId, reviewEvent.action)
+            .transform(GroupBy.groupBy(reviewEvent.action).`as`(GroupBy.sum(reviewEvent.action.count())))
+            .entries.associate { it.key to it.value }
 
-        if (events.count { it.action == Action.ADD } == events.count { it.action == Action.DELETE } + 1) {
+        if (transform[Action.ADD] == transform[Action.DELETE].also { (it ?: 0) + 1 }) {
             return true
         }
 
@@ -49,3 +56,4 @@ class ReviewEventRepositorySupportImpl (
     }
 
 }
+
