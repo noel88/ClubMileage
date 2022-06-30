@@ -1,5 +1,6 @@
 package com.triple.clubmileage.service
 
+import com.triple.clubmileage.domain.Action
 import com.triple.clubmileage.domain.ReviewEvent
 import com.triple.clubmileage.repository.ReviewEventRepository
 import com.triple.clubmileage.service.dto.EventDto
@@ -33,6 +34,10 @@ class ReviewEventService(
     }
 
     fun isFirstPlaceReview(placeId: String) : Boolean {
-        return reviewEventRepository.isFirstPlaceReview(placeId)
+        val actionMap = reviewEventRepository.isFirstPlaceReview(placeId)
+        if (actionMap[Action.ADD] == actionMap[Action.DELETE].also { (it ?: 0) + 1 }) {
+            return true
+        }
+        return false
     }
 }

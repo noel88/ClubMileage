@@ -7,11 +7,6 @@ import com.querydsl.jpa.impl.JPAQueryFactory
 import com.triple.clubmileage.domain.Action
 import com.triple.clubmileage.domain.QReviewEvent.reviewEvent
 import com.triple.clubmileage.domain.ReviewEvent
-import java.util.*
-import java.util.Map
-import java.util.function.Function
-import java.util.stream.Collectors
-import kotlin.collections.count
 
 class ReviewEventRepositorySupportImpl (
     private val query: JPAQueryFactory,
@@ -41,18 +36,13 @@ class ReviewEventRepositorySupportImpl (
             .fetchFirst()
     }
 
-    override fun isFirstPlaceReview(placeId: String): Boolean {
-        val transform = query
+    override fun isFirstPlaceReview(placeId: String): Map<Action, Long> {
+        return query
             .from(reviewEvent)
             .groupBy(reviewEvent.placeId, reviewEvent.action)
+            .having(reviewEvent.action.notIn(Action.MOD))
             .transform(GroupBy.groupBy(reviewEvent.action).`as`(GroupBy.sum(reviewEvent.action.count())))
             .entries.associate { it.key to it.value }
-
-        if (transform[Action.ADD] == transform[Action.DELETE].also { (it ?: 0) + 1 }) {
-            return true
-        }
-
-        return false
     }
 
 }
