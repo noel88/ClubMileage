@@ -22,7 +22,7 @@ class ActionService(
         //NOTE:
         // - 이전 사용자가 A 장소에 리뷰를 쓰고 지우면, 새로운 사용자는 A 장소의 첫 리뷰가 된다.
 
-        if (reviewEventService.countByPlaceId(reviewEvent.placeId)) {
+        if (reviewEventService.isFirstPlaceReview(reviewEvent.placeId)) {
             mileage++
         }
 

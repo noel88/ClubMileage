@@ -32,7 +32,7 @@ class ReviewEventService(
         return reviewEventRepository.findByCurrentModifiedReviewEvent(userId, placeId)
     }
 
-    fun countByPlaceId(placeId: String) : Boolean {
+    fun isFirstPlaceReview(placeId: String) : Boolean {
         return reviewEventRepository.isFirstPlaceReview(placeId)
     }
 }
