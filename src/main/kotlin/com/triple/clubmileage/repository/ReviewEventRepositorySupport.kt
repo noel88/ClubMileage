@@ -6,4 +6,5 @@ interface ReviewEventRepositorySupport {
 
     fun findByCurrentModifiedReviewEvent(userId: String, placeId: String) : ReviewEvent?
     fun findByReviewIdOrderByModifiedDateDesc(reviewId: String) : ReviewEvent?
+    fun isFirstPlaceReview(placeId: String): Boolean
 }

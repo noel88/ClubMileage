@@ -3,7 +3,6 @@ package com.triple.clubmileage.service
 import com.triple.clubmileage.domain.MileageType
 import com.triple.clubmileage.domain.ReviewEvent
 import com.triple.clubmileage.repository.MileageRepository
-import com.triple.clubmileage.service.dto.EventDto
 import com.triple.clubmileage.service.dto.MileageEventDto
 import com.triple.clubmileage.service.dto.MileageInfo
 import org.springframework.stereotype.Service
@@ -16,11 +15,14 @@ class ActionService(
     fun add(reviewEvent: ReviewEvent): MileageInfo {
         var mileage = 1
 
-        if (reviewEvent.attackedImages?.isNotEmpty() == true) {
+        if (reviewEvent.attackedImages!!.isNotEmpty()) {
             mileage++
         }
 
-        if (reviewEventService.countByPlaceId(reviewEvent.placeId) == 1) {
+        //NOTE:
+        // - 이전 사용자가 A 장소에 리뷰를 쓰고 지우면, 새로운 사용자는 A 장소의 첫 리뷰가 된다.
+
+        if (reviewEventService.countByPlaceId(reviewEvent.placeId)) {
             mileage++
         }
 

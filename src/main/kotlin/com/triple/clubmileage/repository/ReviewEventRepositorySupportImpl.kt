@@ -3,6 +3,7 @@ package com.triple.clubmileage.repository
 import com.querydsl.core.types.Order
 import com.querydsl.core.types.OrderSpecifier
 import com.querydsl.jpa.impl.JPAQueryFactory
+import com.triple.clubmileage.domain.Action
 import com.triple.clubmileage.domain.QReviewEvent.reviewEvent
 import com.triple.clubmileage.domain.ReviewEvent
 
@@ -33,4 +34,18 @@ class ReviewEventRepositorySupportImpl (
             .orderBy(OrderSpecifier(Order.DESC, reviewEvent.modifiedDate))
             .fetchFirst()
     }
+
+    override fun isFirstPlaceReview(placeId: String): Boolean {
+        val events = query
+            .selectFrom(reviewEvent)
+            .where(reviewEvent.placeId.eq(placeId))
+            .fetch()
+
+        if (events.count { it.action == Action.ADD } == events.count { it.action == Action.DELETE } + 1) {
+            return true
+        }
+
+        return false
+    }
+
 }
