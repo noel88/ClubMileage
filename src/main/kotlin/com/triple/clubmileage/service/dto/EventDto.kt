@@ -8,7 +8,7 @@ data class EventDto (
     var action: Action,
     var reviewId: String,
     var content: String,
-    var attachedPhotoIds: List<String>? = null,
+    var attachedPhotoIds: List<String>? = arrayListOf(),
     var userId: String,
     var placeId: String,
 ) 

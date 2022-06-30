@@ -18,7 +18,7 @@ data class Mileage(
     var point: Int = 0,
     var userId: String,
     var placeId: String,
-    var reviewEventId: String,
+    var reviewId: String,
 
     @CreatedDate
     @Column(updatable = false)

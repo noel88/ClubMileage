@@ -30,18 +30,20 @@ class ActionService(
     fun mod(reviewEvent: ReviewEvent, currentModifiedReviewEvent: ReviewEvent?) : MileageInfo? {
         var mileage = 0
 
+        //NOTE:
+        // - 이전 리뷰에서 이미지를 삽입하지 않고, 수정시 삽입하는 경우 +1
+        // - 이전 리뷰에서 이미지를 2장 삽입하고, 수정시 이미지를 교체하는 경우 0
+        // - 이전 리뷰에서 이미지를 삽입하고, 수정시 이미지를 삭제하는 경우 -1
+
         return when {
-            reviewEvent.attackedImages == null -> {
-                return MileageInfo(type = MileageType.SUBTRACT, mileage = --mileage)
+            reviewEvent.attackedImages!!.isEmpty() -> {
+                MileageInfo(type = MileageType.SUBTRACT, mileage = --mileage)
             }
-            !reviewEvent.attackedImages!!.containsAll(currentModifiedReviewEvent!!.attackedImages!!)  -> {
-                return MileageInfo(type = MileageType.SUBTRACT, mileage = --mileage)
-            }
-            reviewEvent.attackedImages!!.containsAll(currentModifiedReviewEvent!!.attackedImages!!) -> {
-                return null
+            currentModifiedReviewEvent?.attackedImages!!.isEmpty() -> {
+                MileageInfo(type = MileageType.ADD, mileage = ++mileage)
             }
             else -> {
-                return MileageInfo(type = MileageType.ADD, mileage = ++mileage)
+                null
             }
         }
     }

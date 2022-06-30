@@ -21,7 +21,7 @@ data class ReviewEvent(
     var content: String,
 
     @ElementCollection
-    var attackedImages: List<String>? = null,
+    var attackedImages: List<String>? = arrayListOf(),
 
     var userId: String,
     var placeId: String,

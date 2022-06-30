@@ -39,7 +39,7 @@ class MileageService(
                     point = it.mileage,
                     userId = mileageEventDto.userId,
                     placeId = mileageEventDto.placeId,
-                    reviewEventId = mileageEventDto.reviewId
+                    reviewId = mileageEventDto.reviewId
                 )
             )
         }
