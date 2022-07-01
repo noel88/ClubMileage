@@ -48,7 +48,7 @@ dependencies {
     kapt("org.springframework.boot:spring-boot-configuration-processor")
     kapt("com.querydsl:querydsl-apt:5.0.0:jpa")
 
-    runtimeOnly("org.postgresql:postgresql")
+    runtimeOnly("mysql:mysql-connector-java")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
