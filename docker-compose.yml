@@ -14,11 +14,12 @@ services:
       - db
   db:
     image: mysql:5.7.32
+    command: --character-set-server=utf8 --collation-server=utf8_general_ci
     environment:
       MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: club
-      MYSQL_ROOT_HOST: "%"
+      MYSQL_USER_HOST: "%"
 
     ports:
       - "3307:3306"
