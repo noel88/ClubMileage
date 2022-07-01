@@ -1,4 +1,4 @@
-package com.triple.clubmileage.service.event
+package com.triple.clubmileage.service.event.action
 
 import com.triple.clubmileage.service.dto.MileageInfo
 

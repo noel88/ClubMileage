@@ -35,7 +35,7 @@ class ReviewEventService(
 
     fun isFirstPlaceReview(placeId: String) : Boolean {
         val actionMap = reviewEventRepository.isFirstPlaceReview(placeId)
-        if (actionMap[Action.ADD] == actionMap[Action.DELETE].also { (it ?: 0) + 1 }) {
+        if (actionMap[Action.ADD] == (actionMap[Action.DELETE]?.let { it + 1 } ?: 1)) {
             return true
         }
         return false

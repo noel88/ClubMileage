@@ -1,17 +1,15 @@
-package com.triple.clubmileage.service.event
+package com.triple.clubmileage.service.event.action
 
-import com.triple.clubmileage.domain.ReviewEvent
 import com.triple.clubmileage.service.ActionService
 import com.triple.clubmileage.service.dto.MileageEventDto
 import com.triple.clubmileage.service.dto.MileageInfo
 
-class AddEventActionCommand(
+class DelEventActionCommand(
     private val actionService: ActionService,
-    private var reviewEvent: ReviewEvent
-
-    ) : EventActionCommand {
+    private val mileageEventDto: MileageEventDto,
+) : EventActionCommand {
     override fun execute(): MileageInfo? {
-        return actionService.add(reviewEvent)
+        return actionService.del(mileageEventDto)
     }
 
 }

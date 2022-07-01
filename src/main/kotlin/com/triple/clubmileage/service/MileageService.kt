@@ -5,9 +5,9 @@ import com.triple.clubmileage.domain.Mileage
 import com.triple.clubmileage.repository.MileageRepository
 import com.triple.clubmileage.service.dto.MileageDto
 import com.triple.clubmileage.service.dto.MileageEventDto
-import com.triple.clubmileage.service.event.AddEventActionCommand
-import com.triple.clubmileage.service.event.DelEventActionCommand
-import com.triple.clubmileage.service.event.ModEventActionCommand
+import com.triple.clubmileage.service.event.action.AddEventActionCommand
+import com.triple.clubmileage.service.event.action.DelEventActionCommand
+import com.triple.clubmileage.service.event.action.ModEventActionCommand
 import org.springframework.stereotype.Service
 import java.util.*
 
