@@ -1,15 +1,15 @@
 spring:
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/club
-    password: password
-    username: postgres
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/club
+    password: admin
+    username: root
   jpa:
     generate-ddl: true
     show-sql: true
     hibernate:
       ddl-auto: update
-    database: postgresql
+    database: mysql
     properties:
       hibernate:
         format_sql: true
