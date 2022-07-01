@@ -15,10 +15,10 @@ class EventController(
     private val reviewEventService: ReviewEventService
 ) {
 
-    @PostMapping("/event")
+    @PostMapping("/events")
     fun reviewEvent(@RequestBody eventDto: EventDto): ResponseEntity<String> {
         reviewEventService.setEvent(eventDto)
-        return ResponseEntity("Event", HttpStatus.OK)
+        return ResponseEntity(HttpStatus.CREATED)
     }
 
 }
