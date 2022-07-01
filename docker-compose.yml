@@ -6,20 +6,22 @@ services:
     image: club_mileages
     ports:
       - "9900:9900"
+    restart: always
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/club
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/club?useSSL=false&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: admin
     depends_on:
       - db
   db:
-    image: mysql:5.7.32
+    image: mysql
+    container_name: db
     command: --character-set-server=utf8 --collation-server=utf8_general_ci
     environment:
-      MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: admin
+      MYSQL_USER: club
+      MYSQL_PASSWORD: club
       MYSQL_DATABASE: club
       MYSQL_USER_HOST: "%"
-
     ports:
-      - "3307:3306"
+      - "3306:3306"
