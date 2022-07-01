@@ -7,19 +7,18 @@ services:
     ports:
       - "9900:9900"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/club
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/club
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: admin
     depends_on:
       - db
   db:
-    image: postgres:13
+    image: mysql:5.7.32
     environment:
-      POSTGRES_DB: club
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_INITDB_ARGS: --encoding=UTF-8
-      LC_COLLATE: "C"
-      TZ: Asia/Seoul
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: club
+      MYSQL_ROOT_HOST: "%"
+
     ports:
-      - "5439:5432"
+      - "3307:3306"
