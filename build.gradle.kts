@@ -41,10 +41,13 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.springdoc:springdoc-openapi-ui:1.6.9")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("com.querydsl:querydsl-jpa:5.0.0")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     kapt("org.springframework.boot:spring-boot-configuration-processor")
+    kapt("com.querydsl:querydsl-apt:5.0.0:jpa")
+
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
