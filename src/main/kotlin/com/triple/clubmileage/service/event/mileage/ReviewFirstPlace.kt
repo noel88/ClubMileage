@@ -11,7 +11,7 @@ class ReviewFirstPlace(
 
     override fun grant(reviewEvent: ReviewEvent): Int {
         if (reviewEventService.isFirstPlaceReview(reviewEvent.placeId)) {
-            return mileage++
+            mileage++
         }
         return mileage
     }
